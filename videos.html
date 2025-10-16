@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leonardo de Oliveira - Vídeos</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: #fdfdfd;
+        color: #333;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        text-align: center;
+    }
+    h1 {
+        color: #222;
+        font-size: 3rem;
+        margin-bottom: 40px;
+        letter-spacing: 1px;
+    }
+    .video-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+    .video-thumb {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        cursor: pointer;
+        border-radius: 10px;
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    /* Overlay / Lightbox */
+    .lightbox {
+        display: none;
+        position: fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background: rgba(0,0,0,0.85);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+    .lightbox.active {
+        display: flex;
+    }
+    .lightbox-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 80%;
+        display: flex;
+        align-items: center;
+    }
+    .lightbox video {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+    .close-btn {
+        position: absolute;
+        top: -30px;
+        right: 0;
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2.5rem;
+        color: white;
+        cursor: pointer;
+        font-weight: bold;
+        padding: 0 15px;
+        user-select: none;
+    }
+    .prev { left: -50px; }
+    .next { right: -50px; }
+
+    a.back {
+        display: inline-block;
+        margin-top: 25px;
+        background-color: #ccc;
+        color: #222;
+        padding: 14px 30px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: 0.3s;
+    }
+    a.back:hover {
+        background-color: #aaa;
+    }
+
+    @media(max-width:768px){
+        h1 { font-size: 2.2rem; }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Vídeos</h1>
+    <div class="video-grid">
+        <div class="video-thumb" data-index="0">Vídeo 1</div>
+        <div class="video-thumb" data-index="1">Vídeo 2</div>
+        <div class="video-thumb" data-index="2">Vídeo 3</div>
+        <div class="video-thumb" data-index="3">Vídeo 4</div>
+        <div class="video-thumb" data-index="4">Vídeo 5</div>
+        <div class="video-thumb" data-index="5">Vídeo 6</div>
+        <div class="video-thumb" data-index="6">Vídeo 7</div>
+        <div class="video-thumb" data-index="7">Vídeo 8</div>
+        <div class="video-thumb" data-index="8">Vídeo 9</div>
+        <div class="video-thumb" data-index="9">Vídeo 10</div>
+    </div>
+
+    <!-- Lightbox / Carousel -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <span class="close-btn" id="closeBtn">&times;</span>
+            <span class="nav-btn prev" id="prevBtn">&#10094;</span>
+            <video id="lightboxVideo" controls></video>
+            <span class="nav-btn next" id="nextBtn">&#10095;</span>
+        </div>
+    </div>
+
+    <a href="index.html" class="back">⬅ Voltar ao Portfólio</a>
+</div>
+
+<script>
+    const videos = [
+        'videos/video1.mp4',
+        'videos/video2.mp4',
+        'videos/video3.mp4',
+        'videos/video4.mp4',
+        'videos/video5.mp4',
+        'videos/video6.mp4',
+        'videos/video7.mp4',
+        'videos/video8.mp4',
+        'videos/video9.mp4',
+        'videos/video10.mp4'
+    ];
+
+    const thumbs = document.querySelectorAll('.video-thumb');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxVideo = document.getElementById('lightboxVideo');
+    const closeBtn = document.getElementById('closeBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 0;
+
+    thumbs.forEach(thumb => {
+        thumb.addEventListener('click', () => {
+            currentIndex = parseInt(thumb.getAttribute('data-index'));
+            showVideo();
+        });
+    });
+
+    function showVideo() {
+        lightbox.classList.add('active');
+        lightboxVideo.src = videos[currentIndex];
+        lightboxVideo.play();
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        lightboxVideo.pause();
+        lightboxVideo.currentTime = 0;
+    }
+
+    function prevVideo() {
+        currentIndex = (currentIndex - 1 + videos.length) % videos.length;
+        showVideo();
+    }
+
+    function nextVideo() {
+        currentIndex = (currentIndex + 1) % videos.length;
+        showVideo();
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', prevVideo);
+    nextBtn.addEventListener('click', nextVideo);
+</script>
+</body>
+</html>

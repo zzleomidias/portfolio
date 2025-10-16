@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leonardo de Oliveira - Portfólio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            background-color: #3c0069;
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+            max-width: 1000px;
+            width: 90%;
+        }
+
+        .bio {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bio h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #b388ff;
+        }
+
+        .bio p {
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .photo {
+            flex: 1;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .buttons {
+            margin-top: 25px;
+        }
+
+        .buttons button {
+            background-color: #b388ff;
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            margin-right: 10px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .buttons button:hover {
+            background-color: #d0a6ff;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                height: auto;
+                padding: 20px;
+            }
+
+            .container {
+                flex-direction: column-reverse;
+            }
+
+            .photo img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="bio">
+            <h1>Leonardo de Oliveira</h1>
+            <p>
+                Olá, pessoal! 👋 Sejam bem-vindos ao meu portfólio.<br><br>
+                Sou videomaker e fotógrafo, especializado em registrar momentos de casamentos, aniversários e eventos, além de produzir vídeos comerciais. 🎥<br>
+                Crio vídeos curtos e longos com atenção aos detalhes e de forma criativa.<br><br>
+                Confira meu trabalho nos dois botões abaixo ou me siga no Instagram: 
+                <a href="https://www.instagram.com/zz_leomidias/" target="_blank">@zzleomidias</a>
+                </p>
+
+            <div class="buttons">
+                <button onclick="window.location.href='videos.html'">🎥 Vídeos</button>
+                <button onclick="window.location.href='fotos.html'">📸 Fotos</button>
+            </div>
+        </div>
+        <div class="photo">
+            <img src="img/eu.png" alt="Foto de Leonardo de Oliveira">
+        </div>
+    </div>
+</body>
+</html>
